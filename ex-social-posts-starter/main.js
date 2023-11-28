@@ -56,7 +56,7 @@ const posts = [
     }
 ];
 
-
+let array = []; //in questo ci dobbiamo mettre gli id delle foto con like (push)
 
 const containerElement = document.querySelector('div.posts-list');
 
@@ -68,10 +68,10 @@ for (let i = 0; i < posts.length; i++){
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src=${post.image} alt="Phil Mangione">                    
+                    <img class="profile-pic" src=${post.author.image} alt=>                    
                 </div>
                 <div class="post-meta__data">
-                    <div class="post-meta__author">${post.name}</div>
+                    <div class="post-meta__author">${post.author.name}</div>
                     <div class="post-meta__time">${post.created}</div>
                 </div>                    
             </div>
@@ -95,5 +95,18 @@ for (let i = 0; i < posts.length; i++){
         </div>            
     </div>`
 
+   
+    
+
     containerElement.appendChild(postCards)
 }
+
+let miPiace = document.querySelector('a.like-button .js-like-button');
+
+miPiace.classList.add('.like-button--liked')
+
+let bottoneMiPiace = document.querySelector('span.like-button__label');
+
+bottoneMiPiace.addEventListener('click', function(){
+    miPiace.classList.add('.like-button--liked')
+}) 
