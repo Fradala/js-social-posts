@@ -89,7 +89,7 @@ for (let i = 0; i < posts.length; i++){
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${post.likes}</b> persone
+                    Piace a <strong id="${post.id}" class="js-likes-counter">${post.likes}</strong> persone
                 </div>
             </div> 
         </div>            
@@ -101,12 +101,23 @@ for (let i = 0; i < posts.length; i++){
     containerElement.appendChild(postCards)
 }
 
-let miPiace = document.querySelector('a.like-button .js-like-button');
 
-miPiace.classList.add('.like-button--liked')
+const likeButtonList = containerElement.querySelectorAll('a.like-button.js-like-button');
+const likeCountersList = containerElement.querySelectorAll('strong.js-likes-counter');
 
-let bottoneMiPiace = document.querySelector('span.like-button__label');
+for (let i = 0; i < likeButtonList.length; i ++){
+    const currentLikeButton = likeButtonList[i];
+    currentLikeButton.addEventListener('click', function(event){
+        event.preventDefault();
 
-bottoneMiPiace.addEventListener('click', function(){
-    miPiace.classList.add('.like-button--liked')
-}) 
+        if (currentLikeButton.classList.contains('like-button--liked')){
+            currentLikeButton.classList.remove('like-button--liked');
+
+            likeCountersList[i].innerHTML = parent(likeCountersList[i].innerHTML, 10) - 1;
+
+        } else {
+            currentLikeButton.classList.add('like-button--liked');
+            likeCountersList[i].innerHTML = parent(likeCountersList[i].innerHTML, 10) + 1;
+        }
+    })
+}
